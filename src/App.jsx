@@ -4,6 +4,11 @@ import "./App.css";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const projects = [
+  { title: "Weather App", description: "...", link: "..." },
+  { title: "Todo App", description: "...", link: "..." },
+  { title: "Portfolio Site", description: "...", link: "..." },
+  ]
 
   return (
     <div className={darkMode ? "app dark" : "app light"}>
@@ -25,24 +30,16 @@ function App() {
 
         <section>
           <h2>Projects</h2>
-
-          <ProjectCard
-            title="E-commerce platform"
-            description="E-commerce platform using MERN"
-            link="https://github.com/you/ecommerce-platform"
-          />
-
-          <ProjectCard
-            title="Weather App"
-            description="A weather dashboard using a public API"
-            link="https://github.com/you/weather-app"
-          />
-
-          <ProjectCard
-            title="Todo App"
-            description="A simple task manager"
-            link="https://github.com/you/todo-app"
-          />
+           {projects.map((project) => (
+              <ProjectCard
+                key={project.title}
+                title={project.title}
+                description={project.description}
+                link={project.link}
+              />
+            ))
+           }
+          
         </section>
       </main>
 
