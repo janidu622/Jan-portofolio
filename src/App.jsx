@@ -61,7 +61,7 @@ function App() {
       <main>
         <section>
           <h2>About</h2>
-          <p>I develop and design sustainable digital solutions.</p>
+          <p>clean code practitioner and leet code addict</p>
         </section>
 
         <section>
