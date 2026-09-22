@@ -9,7 +9,25 @@ function App() {
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  
+  // Fetch GitHub repositories when the page loads
+  useEffect(() => {
+    async function fetchRepos() {
+      try {
+        const response = await fetch(
+          "https://api.github.com/users/janidu622/repos"
+        );
+
+        const data = await response.json();
+        setRepos(data);
+      } catch (error) {
+        console.error("Failed to fetch repositories:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchRepos();
+  }, []);
 
   const projects = [
     {
@@ -59,33 +77,7 @@ function App() {
           ))}
         </section>
 
-        <section>
-          <h2>My GitHub Projects</h2>
-
-          {loading ? (
-            <p>Loading GitHub projects...</p>
-          ) : (
-            <ul>
-              {repos.map((repo) => (
-                <li key={repo.id}>
-                  <h3>{repo.name}</h3>
-
-                  <p>
-                    {repo.description || "No description available."}
-                  </p>
-
-                  <a
-                    href={repo.html_url}
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    View on GitHub
-                  </a>
-                </li>
-              ))}
-            </ul>
-          )}
-        </section>
+        
       </main>
 
       <footer>
