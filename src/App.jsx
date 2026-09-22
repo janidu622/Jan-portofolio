@@ -1,13 +1,15 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
 import "./App.css";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
-  //github repo
+
+  // GitHub repositories
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
- //fetch github repos when page loads
+
+  // Fetch GitHub repositories when the page loads
   useEffect(() => {
     async function fetchRepos() {
       try {
@@ -28,14 +30,25 @@ function App() {
   }, []);
 
   const projects = [
-  { title: "Weather App", description: "...", link: "..." },
-  { title: "Todo App", description: "...", link: "..." },
-  { title: "Portfolio Site", description: "...", link: "..." },
-  ]
+    {
+      title: "Weather App",
+      description: "...",
+      link: "...",
+    },
+    {
+      title: "Todo App",
+      description: "...",
+      link: "...",
+    },
+    {
+      title: "Portfolio Site",
+      description: "...",
+      link: "...",
+    },
+  ];
 
   return (
     <div className={darkMode ? "app dark" : "app light"}>
-
       <button onClick={() => setDarkMode(!darkMode)}>
         {darkMode ? "Light Mode" : "Dark Mode"}
       </button>
@@ -53,15 +66,17 @@ function App() {
 
         <section>
           <h2>Projects</h2>
-           {projects.map((project) => (
-              <ProjectCard
-                key={project.title}
-                title={project.title}
-                description={project.description}
-                link={project.link}
-              />
-            ))
-          }
+
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.title}
+              title={project.title}
+              description={project.description}
+              link={project.link}
+            />
+          ))}
+        </section>
+
         <section>
           <h2>My GitHub Projects</h2>
 
@@ -89,14 +104,11 @@ function App() {
             </ul>
           )}
         </section>
-          
-        </section>
       </main>
 
       <footer>
         <p>©2026 Janidu</p>
       </footer>
-
     </div>
   );
 }
