@@ -5,9 +5,7 @@ import "./App.css";
 function App() {
   const [darkMode, setDarkMode] = useState(false);
 
-  // GitHub repositories
-  const [repos, setRepos] = useState([]);
-  const [loading, setLoading] = useState(true);
+  
 
   // Fetch GitHub repositories when the page loads
   useEffect(() => {
