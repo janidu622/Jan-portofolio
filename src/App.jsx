@@ -4,6 +4,9 @@ import "./App.css";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  const [repos, setRepos] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   const projects = [
   { title: "Weather App", description: "...", link: "..." },
   { title: "Todo App", description: "...", link: "..." },
@@ -38,7 +41,7 @@ function App() {
                 link={project.link}
               />
             ))
-           }
+          }
           
         </section>
       </main>
