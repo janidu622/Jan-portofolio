@@ -4,8 +4,28 @@ import "./App.css";
 
 function App() {
   const [darkMode, setDarkMode] = useState(false);
+  //github repo
   const [repos, setRepos] = useState([]);
   const [loading, setLoading] = useState(true);
+ //fetch github repos when page loads
+  useEffect(() => {
+    async function fetchRepos() {
+      try {
+        const response = await fetch(
+          "https://api.github.com/users/janidu622/repos"
+        );
+
+        const data = await response.json();
+        setRepos(data);
+      } catch (error) {
+        console.error("Failed to fetch repositories:", error);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchRepos();
+  }, []);
 
   const projects = [
   { title: "Weather App", description: "...", link: "..." },
