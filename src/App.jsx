@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import ProjectCard from "./ProjectCard";
+import Login from "./login";
 import "./App.css";
 
 function App() {
@@ -48,14 +49,17 @@ function App() {
   ];
 
   return (
+   
     <div className={darkMode ? "app dark" : "app light"}>
       <button onClick={() => setDarkMode(!darkMode)}>
         {darkMode ? "Light Mode" : "Dark Mode"}
       </button>
 
       <header>
+        <Login/>
         <h1>Janidu Siriwardhana</h1>
         <p>Full-Stack Developer</p>
+       
       </header>
 
       <main>
@@ -63,7 +67,7 @@ function App() {
           <h2>About</h2>
           <p>clean code practitioner and leet code addict</p>
         </section>
-
+        
         <section>
           <h2>Projects</h2>
 
