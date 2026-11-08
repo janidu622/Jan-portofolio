@@ -8,7 +8,7 @@ export default function Scene({day}:{day:boolean}) {
   const el=mount.current;if(!el)return;
   let renderer:THREE.WebGLRenderer;
   try {renderer=new THREE.WebGLRenderer({alpha:true,antialias:true});} catch {return;}
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.7)); renderer.setClearColor(0x000000,0);el.appendChild(renderer.domElement);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio,1.7)); renderer.setClearColor(0x000000,0);el.appendChild(renderer.domElement);el.classList.add("webgl-ready");
   const scene=new THREE.Scene();const camera=new THREE.PerspectiveCamera(37,1,.1,100);camera.position.set(0,2.2,11);camera.lookAt(0,.1,0);
   scene.add(new THREE.HemisphereLight(0xe9f3ff,0x493f65,2));const light=new THREE.DirectionalLight(0xffffff,3);light.position.set(-3,6,7);scene.add(light);
   const group=new THREE.Group();scene.add(group);
@@ -27,5 +27,5 @@ export default function Scene({day}:{day:boolean}) {
   let frame=0; const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;const animate=()=>{frame=requestAnimationFrame(animate);if(!reduced){group.rotation.y=Math.sin(Date.now()*.00045)*.13;group.position.y=Math.sin(Date.now()*.001)*.06;points.rotation.z+=.00015;}renderer.render(scene,camera)};animate();
   return()=>{cancelAnimationFrame(frame);window.removeEventListener('resize',resize);scene.traverse(o=>{if(o instanceof THREE.Mesh){o.geometry.dispose();if(Array.isArray(o.material))o.material.forEach(m=>m.dispose());else o.material.dispose()}});stars.dispose();(points.material as THREE.Material).dispose();renderer.dispose();renderer.domElement.remove()};
  },[day]);
- return <div ref={mount} className="scene" role="img" aria-label="A 3D astronaut with a laptop sitting on the moon"/>;
+ return <div ref={mount} className="scene" role="img" aria-label="An astronaut with a laptop sitting on the moon"><svg className="scene-fallback" viewBox="0 0 500 500" aria-hidden="true"><ellipse cx="250" cy="361" rx="180" ry="68" fill="#aebbd4"/><ellipse cx="170" cy="347" rx="29" ry="9" fill="#8e9fbb"/><ellipse cx="336" cy="373" rx="23" ry="7" fill="#8e9fbb"/><circle cx="250" cy="181" r="61" fill="#f1f5ff"/><ellipse cx="250" cy="181" rx="44" ry="39" fill="#243856"/><ellipse cx="235" cy="168" rx="16" ry="7" fill="#a9def0" opacity=".8"/><rect x="207" y="239" width="86" height="98" rx="35" fill="#e7edf8"/><path d="M211 257 Q180 266 182 311 M289 257 Q319 266 318 311" fill="none" stroke="#e7edf8" strokeWidth="28" strokeLinecap="round"/><path d="M224 319 Q190 347 174 340 M276 319 Q310 347 326 340" fill="none" stroke="#e7edf8" strokeWidth="29" strokeLinecap="round"/><rect x="208" y="276" width="84" height="58" rx="5" fill="#739bad"/><circle cx="250" cy="304" r="6" fill="#d5f4fa"/><path d="M195 337 H305" stroke="#e1e9f3" strokeWidth="7" strokeLinecap="round"/><path d="M95 132 l5 12 12 5 -12 5 -5 12 -5 -12 -12 -5 12 -5z M395 224 l4 9 9 4 -9 4 -4 9 -4 -9 -9 -4 9 -4z" fill="#b7f3d1"/></svg></div>;
 }
